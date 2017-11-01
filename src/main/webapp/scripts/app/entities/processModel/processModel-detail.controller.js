@@ -217,6 +217,18 @@ angular.module('artirestApp')
                 });
         };
 
+        $scope.removeInstance = function(id){
+            if(!confirm('Are you sure?'))
+                return;
+            $http.delete('/api/processes/' + id, {})
+                .then(function (res) {
+                    console.log(res);
+                    $scope.loadInstances();
+                }, function (res) {
+
+                });
+        }
+
         var unsubscribe = $rootScope.$on('artirestApp:processModelUpdate', function(event, result) {
             $scope.processModel = result;
         });

@@ -1,0 +1,31 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "firstProcessId",
+            "fieldType": "String",
+            "fieldValidateRules": []
+        },
+        {
+            "fieldName": "firstProcessAttr",
+            "fieldType": "String",
+            "fieldValidateRules": []
+        },
+        {
+            "fieldName": "secondProcessId",
+            "fieldType": "String",
+            "fieldValidateRules": []
+        },
+        {
+            "fieldName": "secondProcessAttr",
+            "fieldType": "String",
+            "fieldValidateRules": []
+        }
+    ],
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "coordinator",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
+}
