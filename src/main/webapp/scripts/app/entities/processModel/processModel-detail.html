@@ -1,6 +1,6 @@
 
 <div>
-    <h2><span>ProcessModel</span> {{processModel.id}}</h2>
+    <h2><span>ProcessModel</span> {{processModel.name}}</h2>
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
@@ -10,6 +10,14 @@
             </tr>
             </thead>
             <tbody>
+            <tr>
+                <td>
+                    <span>ID</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{processModel.id}}</span>
+                </td>
+            </tr>
             <tr>
                 <td>
                     <span>Name</span>
@@ -300,6 +308,11 @@
                             <!-- <td>{{instance.isRunning}}</td> -->
                             <td>{{instance.createdAt | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
                             <td>{{instance.updatedAt | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
+                            <td style="width: 100px;">
+                                <button type="button" class="btn btn-sm btn-danger" ng-click="removeInstance(instance.id)">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </button>
+                            </td>
                         </tr>
                         </tbody>
                     </table>
