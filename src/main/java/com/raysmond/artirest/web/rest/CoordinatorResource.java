@@ -1,5 +1,6 @@
 package com.raysmond.artirest.web.rest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import com.codahale.metrics.annotation.Timed;
 import com.raysmond.artirest.domain.Coordinator;
@@ -36,6 +37,7 @@ public class CoordinatorResource {
 
     private final CoordinatorRepository coordinatorRepository;
 
+    @Autowired
     public CoordinatorResource(CoordinatorRepository coordinatorRepository) {
         this.coordinatorRepository = coordinatorRepository;
     }
