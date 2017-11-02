@@ -5,14 +5,14 @@ angular.module('artirestApp')
         $stateProvider
             .state('process', {
                 parent: 'entity',
-                url: '/processs',
+                url: '/process',
                 data: {
                     authorities: ['ROLE_USER'],
                     pageTitle: 'Processes'
                 },
                 views: {
                     'content@': {
-                        templateUrl: 'scripts/app/entities/process/processs.html',
+                        templateUrl: 'scripts/app/entities/process/process.html',
                         controller: 'ProcessController'
                     }
                 },
