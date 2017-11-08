@@ -15,11 +15,6 @@
                     ng-model="businessRule.name" required/>
         </div>
         <div class="form-group">
-            <label class="control-label">Service</label>
-            <input required type="text" class="form-control"
-                   ng-model="businessRule.action.service" required/>
-        </div>
-        <div class="form-group">
             <label>PreConditions</label>
             <div>
                 <span ng-repeat="atom in businessRule.preConditions">
@@ -62,7 +57,11 @@
                 </div>
             </div>
         </div>
-
+        <div class="form-group">
+            <label class="control-label">Service</label>
+            <input required type="text" class="form-control"
+                   ng-model="businessRule.action.service" required/>
+        </div>
         <div class="form-group">
             <label>PostConditions</label>
             <div>

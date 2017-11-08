@@ -36,6 +36,57 @@ public class ProcessCreateService {
 //        }
 //    }
 
+    public ProcessModel createVesselProcessModel(){
+        String host = "http://127.0.0.1:3000";
+
+        //Vessel artifact
+
+        ArtifactModel artifact111 = new ArtifactModel();
+        artifact111.setName("Vessel");
+        artifact111.setComment("Vessel artifact");
+        artifact111.attributes.add(new AttributeModel("vesselName", "String", "Vessel name"));
+        artifact111.attributes.add(new AttributeModel("vesselSpeed", "float", "Vessel speed"));
+        artifact111.attributes.add(new AttributeModel("vesselLocation", "String", "Vessel location"));
+        //port list must be splitted by comma in order to save a array
+        artifact111.attributes.add(new AttributeModel("vesselPort", "String", "Vessel available port"));
+        artifact111.attributes.add(new AttributeModel("vesselDockTime", "Date", "Vessel current docking time"));
+        artifact111.attributes.add(new AttributeModel("vesselSparePartName", "String", "Vessel ask for spare part 'vesselSparePartName'"));
+    }
+
+    public ProcessModel createManagerProcessModel(){
+        String host = "http://127.0.0.1:3000";
+
+        //Manager artifact
+
+        ArtifactModel artifact222 = new ArtifactModel();
+        artifact222.setName("Manager");
+        artifact222.setComment("Manager artifact");
+        artifact222.attributes.add(new AttributeModel("managerName", "String", "Manager name"));
+        artifact222.attributes.add(new AttributeModel("vesselSpeed", "float", "Vessel speed"));
+        artifact222.attributes.add(new AttributeModel("vesselLocation", "String", "Vessel location"));
+        //port list must be splitted by comma in order to save a array
+        artifact222.attributes.add(new AttributeModel("vesselPort", "String", "Vessel available port"));
+        artifact222.attributes.add(new AttributeModel("vesselDockTime", "Date", "Vessel current docking time"));
+        artifact222.attributes.add(new AttributeModel("vesselSparePartName", "String", "Vessel ask for spare part 'vesselSparePartName'"));
+    }
+
+    public ProcessModel createSupplierProcessModel(){
+        String host = "http://127.0.0.1:3000";
+
+        //Supplier artifact
+
+        ArtifactModel artifact333 = new ArtifactModel();
+        artifact333.setName("Supplier");
+        artifact333.setComment("Supplier artifact");
+        artifact333.attributes.add(new AttributeModel("supplierName", "String", "Supplier name"));
+        artifact333.attributes.add(new AttributeModel("supplierSpeed", "float", "Supplier speed"));
+        artifact333.attributes.add(new AttributeModel("supplierLocation", "String", "Supplier location"));
+        //port list must be splitted by comma in order to save a array
+        artifact333.attributes.add(new AttributeModel("supplierPort", "String", "Supplier candidate destination"));
+        artifact333.attributes.add(new AttributeModel("supplierDestination", "String", "Supplier current destination"));
+        artifact333.attributes.add(new AttributeModel("supplierDeliverTime", "Date", "Supplier current deliver remaining time"));
+    }
+
     public ProcessModel createLoanProcessModel() {
         String host = "http://localhost:3000";
 

@@ -214,8 +214,8 @@
                         <thead>
                         <tr>
                             <th class="name">Name</th>
-                            <th class="name">Service</th>
                             <th class="name">PreConditions</th>
+                            <th class="name">Service</th>
                             <th class="name">PostConditions</th>
                             <th class="name">Transition</th>
                             <th></th>
@@ -225,7 +225,7 @@
                         <tbody>
                         <tr ng-repeat="rule in processModel.businessRules">
                             <td>{{rule.name}}</td>
-                            <td>{{rule.action.service}}</td>
+
                             <td>
                                 <span ng-repeat="atom in rule.preConditions">
                                     <span ng-if="atom.type =='INSTATE' ">Instate({{atom.artifact}}, "{{atom.state}}")</span>
@@ -243,6 +243,7 @@
                                     <!--{{conditionsToText(rule.preConditions)}}-->
                                 <!--</span>-->
                             </td>
+                            <td>{{rule.action.service}}</td>
                             <td>
                                <span ng-repeat="atom in rule.postConditions">
                                     <span ng-if="atom.type =='INSTATE' ">Instate({{atom.artifact}}, "{{atom.state}}")</span>

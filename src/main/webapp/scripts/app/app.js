@@ -1,12 +1,12 @@
 'use strict';
 
-angular.module('artirestApp', ['LocalStorageModule', 
+angular.module('artirestApp', ['LocalStorageModule',
     'ngResource', 'ngCookies', 'ngAria', 'ngCacheBuster', 'ngFileUpload',
     // jhipster-needle-angularjs-add-module JHipster will add new module
     'ui.bootstrap', 'ui.router',  'infinite-scroll', 'angular-loading-bar'])
 
     .run(function ($rootScope, $location, $window, $http, $state,  Auth, Principal, ENV, VERSION) {
-        
+
         $rootScope.ENV = ENV;
         $rootScope.VERSION = VERSION;
         $rootScope.$on('$stateChangeStart', function (event, toState, toStateParams) {
@@ -16,7 +16,7 @@ angular.module('artirestApp', ['LocalStorageModule',
             if (Principal.isIdentityResolved()) {
                 Auth.authorize();
             }
-            
+
         });
 
         $rootScope.$on('$stateChangeSuccess',  function(event, toState, toParams, fromState, fromParams) {
@@ -37,7 +37,7 @@ angular.module('artirestApp', ['LocalStorageModule',
             }
             $window.document.title = titleKey;
         });
-        
+
         $rootScope.back = function() {
             // If previous state is 'activate' or do not exist go to 'home'
             if ($rootScope.previousStateName === 'activate' || $state.get($rootScope.previousStateName) === null) {
@@ -46,6 +46,32 @@ angular.module('artirestApp', ['LocalStorageModule',
                 $state.go($rootScope.previousStateName, $rootScope.previousStateParams);
             }
         };
+
+
+        // $rootScope.$on('$stateChangeStart',function(event, toState, toParams, fromState, fromParams){
+        //     console.log('$stateChangeStart to '+toState.name+'- fired when the transition begins. toState,toParams : \n',toState, toParams);
+        // });
+        // $rootScope.$on('$stateChangeError',function(event, toState, toParams, fromState, fromParams, error){
+        //     console.log('$stateChangeError - fired when an error occurs during transition.');
+        //     console.log(arguments);
+        // });
+        // $rootScope.$on('$stateChangeSuccess',function(event, toState, toParams, fromState, fromParams){
+        //     console.log('$stateChangeSuccess to '+toState.name+'- fired once the state transition is complete.');
+        // });
+        // $rootScope.$on('$viewContentLoading',function(event, viewConfig){
+        //     console.log('$viewContentLoading - view begins loading - dom not rendered',viewConfig);
+        // });
+        //
+        // /* $rootScope.$on('$viewContentLoaded',function(event){
+        //      // runs on individual scopes, so putting it in "run" doesn't work.
+        //      console.log('$viewContentLoaded - fired after dom rendered',event);
+        //    }); */
+        //
+        // $rootScope.$on('$stateNotFound',function(event, unfoundState, fromState, fromParams){
+        //     console.log('$stateNotFound '+unfoundState.to+'  - fired when a state cannot be found by its name.');
+        //     console.log(unfoundState, fromState, fromParams);
+        // });
+
     })
     .config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider,  httpRequestInterceptorCacheBusterProvider, AlertServiceProvider) {
         // uncomment below to make alerts look like toast
@@ -76,7 +102,7 @@ angular.module('artirestApp', ['LocalStorageModule',
         $httpProvider.interceptors.push('authExpiredInterceptor');
         $httpProvider.interceptors.push('authInterceptor');
         $httpProvider.interceptors.push('notificationInterceptor');
-        
+
     })
     // jhipster-needle-angularjs-add-config JHipster will add new application configuration
     .config(['$urlMatcherFactoryProvider', function($urlMatcherFactory) {
