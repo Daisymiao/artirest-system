@@ -127,5 +127,7 @@ Desktop.ini
 # Maven Wrapper
 ######################
 !.mvn/wrapper/maven-wrapper.jar
+
+
 out
-scripts
+#scripts
