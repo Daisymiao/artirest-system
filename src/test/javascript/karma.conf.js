@@ -30,6 +30,7 @@ module.exports = function (config) {
             'main/webapp/bower_components/flowchart/release/flowchart.min.js',
             'main/webapp/bower_components/raphael/raphael.js',
             'main/webapp/bower_components/gojs/release/go-debug.js',
+            'main/webapp/bower_components/oclazyload/dist/ocLazyLoad.js',
             'main/webapp/bower_components/angular-mocks/angular-mocks.js',
             // endbower
             'main/webapp/scripts/app/app.js',

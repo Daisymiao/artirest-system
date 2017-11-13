@@ -2,6 +2,7 @@ $icon-font-path: "../../bower_components/bootstrap-sass/assets/fonts/bootstrap/"
 
 // bower:scss
 @import "bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+@import "font-awesome/scss/font-awesome.scss";
 // endbower
 
 body {
@@ -206,6 +207,18 @@ ul#strength {
     .tab-item{
         padding-top: 20px;
     }
+}
+
+.bg-white {
+    background:#ffffff;
+}
+
+.table.table-mapped {
+    margin-bottom: 0 !important;
+}
+
+.table .map-anchor {
+    width: 20px;
 }
 
 /* end of Custom alerts for notification */

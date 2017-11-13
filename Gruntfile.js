@@ -55,7 +55,7 @@ module.exports = function (grunt) {
                     /angular-i18n/, // localizations are loaded dynamically
                     'bower_components/bootstrap/' // Exclude Bootstrap LESS as we use bootstrap-sass
                 ],
-                ignorePath: /\.\.\/webapp\/bower_components\// // remove ../webapp/bower_components/ from paths of injected sass files 
+                ignorePath: /\.\.\/webapp\/bower_components\// // remove ../webapp/bower_components/ from paths of injected sass files
             },
             test: {
                 src: 'src/test/javascript/karma.conf.js',
@@ -206,7 +206,7 @@ module.exports = function (grunt) {
         ngtemplates:    {
             dist: {
                 cwd: 'src/main/webapp',
-                src: ['scripts/app/**/*.html', 'scripts/components/**/*.html',],
+                src: ['scripts/app/**/*.html', 'scripts/components/**/*.html'],
                 dest: '.tmp/templates/templates.js',
                 options: {
                     module: 'artirestApp',
@@ -247,7 +247,8 @@ module.exports = function (grunt) {
                     cwd: 'src/main/webapp',
                     dest: '<%= yeoman.dist %>/assets/fonts',
                     src: [
-                      'bower_components/bootstrap/fonts/*.*'
+                        'bower_components/bootstrap/fonts/*.*',
+                        'bower_components/font-awesome/fonts/*.*'
                     ]
                 }]
             },
@@ -385,7 +386,7 @@ module.exports = function (grunt) {
     grunt.registerTask('buildOpenshift', [
         'test',
         'build',
-        'copy:generateOpenshiftDirectory',
+        'copy:generateOpenshiftDirectory'
     ]);
 
     grunt.registerTask('deployOpenshift', [
@@ -395,6 +396,6 @@ module.exports = function (grunt) {
         'buildcontrol:openshift'
     ]);
 
-    
+
     grunt.registerTask('default', ['serve']);
 };

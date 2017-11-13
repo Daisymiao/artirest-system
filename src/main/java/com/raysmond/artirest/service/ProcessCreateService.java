@@ -35,7 +35,7 @@ public class ProcessCreateService {
 //            createOrderProcessModel();
 //        }
 //    }
-
+//TODO: 需修改ProcessModelResource里关于/processModels/create_test_models的函数才能调用新模板流程
     public ProcessModel createVesselProcessModel(){
         String host = "http://127.0.0.1:3000";
 
@@ -51,6 +51,50 @@ public class ProcessCreateService {
         artifact111.attributes.add(new AttributeModel("vesselPort", "String", "Vessel available port"));
         artifact111.attributes.add(new AttributeModel("vesselDockTime", "Date", "Vessel current docking time"));
         artifact111.attributes.add(new AttributeModel("vesselSparePartName", "String", "Vessel ask for spare part 'vesselSparePartName'"));
+
+        StateModel start = new StateModel("start", "Start", StateModel.StateType.START);
+        StateModel applying = new StateModel("applying", "Applying", StateModel.StateType.NORMAL);
+        StateModel voyaging = new StateModel("voyaging", "Voyaging", StateModel.StateType.NORMAL);
+        StateModel anchoring = new StateModel("anchoring", "Anchoring", StateModel.StateType.NORMAL);
+        StateModel docking = new StateModel("docking", "Docking", StateModel.StateType.NORMAL);
+        StateModel end = new StateModel("end", "End", StateModel.StateType.FINAL);
+
+        start.nextStates.add("applying");
+        applying.nextStates.add("voyaging");
+        voyaging.nextStates.add("anchoring");
+        anchoring.nextStates.add("docking");
+        docking.nextStates.add("end");
+        docking.nextStates.add("voyaging");
+
+        artifact111.states.add(start);
+        artifact111.states.add(applying);
+        artifact111.states.add(voyaging);
+        artifact111.states.add(anchoring);
+        artifact111.states.add(docking);
+        artifact111.states.add(end);
+
+        artifactModelRepository.save(artifact111);
+
+        ProcessModel model111 = new ProcessModel();
+        model111.setName("Vessel Process");
+        model111.artifacts.add(artifact111);
+        model111.setStatus(Status.ENACTED);
+
+        //services
+
+        model111.services.add(new ServiceModel(
+           "apply",
+           host + "/vessel/services/apply",
+           ServiceModel.RestMethod.POST,
+           "Vessel",
+           "Vessel"
+        ));
+
+        model111.services.add(new )
+
+
+        //business rules
+
     }
 
     public ProcessModel createManagerProcessModel(){
@@ -62,12 +106,32 @@ public class ProcessCreateService {
         artifact222.setName("Manager");
         artifact222.setComment("Manager artifact");
         artifact222.attributes.add(new AttributeModel("managerName", "String", "Manager name"));
-        artifact222.attributes.add(new AttributeModel("vesselSpeed", "float", "Vessel speed"));
-        artifact222.attributes.add(new AttributeModel("vesselLocation", "String", "Vessel location"));
-        //port list must be splitted by comma in order to save a array
-        artifact222.attributes.add(new AttributeModel("vesselPort", "String", "Vessel available port"));
-        artifact222.attributes.add(new AttributeModel("vesselDockTime", "Date", "Vessel current docking time"));
-        artifact222.attributes.add(new AttributeModel("vesselSparePartName", "String", "Vessel ask for spare part 'vesselSparePartName'"));
+
+        StateModel start = new StateModel("start", "Start", StateModel.StateType.START);
+        StateModel approving = new StateModel("approving", "Approving", StateModel.StateType.NORMAL);
+        StateModel ordering = new StateModel("ordering", "Ordering", StateModel.StateType.NORMAL);
+        StateModel end = new StateModel("end", "End", StateModel.StateType.FINAL);
+
+        start.nextStates.add("approving");
+        approving.nextStates.add("ordering");
+        ordering.nextStates.add("end");
+
+        artifact222.states.add(start);
+        artifact222.states.add(approving);
+        artifact222.states.add(ordering);
+        artifact222.states.add(end);
+
+        artifactModelRepository.save(artifact222);
+
+        ProcessModel model222 = new ProcessModel();
+        model222.setName("Manager Process");
+        model222.artifacts.add(artifact222);
+        model222.setStatus(Status.ENACTED);
+
+        //services
+
+        //business rules
+
     }
 
     public ProcessModel createSupplierProcessModel(){
@@ -85,6 +149,32 @@ public class ProcessCreateService {
         artifact333.attributes.add(new AttributeModel("supplierPort", "String", "Supplier candidate destination"));
         artifact333.attributes.add(new AttributeModel("supplierDestination", "String", "Supplier current destination"));
         artifact333.attributes.add(new AttributeModel("supplierDeliverTime", "Date", "Supplier current deliver remaining time"));
+
+        StateModel start = new StateModel("start", "Start", StateModel.StateType.START);
+        StateModel prepare = new StateModel("prepare", "prepare", StateModel.StateType.NORMAL);
+        StateModel delivering = new StateModel("delivering", "Delivering", StateModel.StateType.NORMAL);
+        StateModel end = new StateModel("end", "End", StateModel.StateType.FINAL);
+
+        start.nextStates.add("prepare");
+        prepare.nextStates.add("delivering");
+        delivering.nextStates.add("end");
+
+        artifact333.states.add(start);
+        artifact333.states.add(prepare);
+        artifact333.states.add(delivering);
+        artifact333.states.add(end);
+
+        artifactModelRepository.save(artifact333);
+
+        ProcessModel model333 = new ProcessModel();
+        model333.setName("Supplier Process");
+        model333.artifacts.add(artifact333);
+        model333.setStatus(Status.ENACTED);
+
+        //services
+
+        //business rules
+
     }
 
     public ProcessModel createLoanProcessModel() {
@@ -166,7 +256,7 @@ public class ProcessCreateService {
             host + "/loan/services/confirm",
             ServiceModel.RestMethod.PUT,
             "Loan",
-            "Loan");
+            "Loan");ProcessModel model = new ProcessModel();
         serviceModel4.inputParams.add("confirmStatus");
 
         model.services.add(serviceModel4);
