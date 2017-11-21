@@ -11,7 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 /**
- * Service Implementation for managing ProcessModel.
+ * Service Implementation for managing Coordinator.
  */
 @Service
 public class CoordinatorService {
@@ -24,7 +24,7 @@ public class CoordinatorService {
     public static final String CACHE_NAME = "artirest.coordinator";
 
     /**
-     * Save a processModel.
+     * Save a coordinator.
      * @return the persisted entity
      */
     public Coordinator save(Coordinator coordinator) {
@@ -34,7 +34,7 @@ public class CoordinatorService {
     }
 
     /**
-     *  get all the processModels.
+     *  get all the coordinators.
      *  @return the list of entities
      */
     public Page<Coordinator> findAll(Pageable pageable) {
@@ -44,7 +44,7 @@ public class CoordinatorService {
     }
 
     /**
-     *  get one processModel by id.
+     *  get one coordinator by id.
      *  @return the entity
      */
     @Cacheable(value = CACHE_NAME)
@@ -55,7 +55,7 @@ public class CoordinatorService {
     }
 
     /**
-     *  delete the  processModel by id.
+     *  delete the coordinator by id.
      */
     public void delete(String id) {
         log.debug("Request to delete Coordinator : {}", id);

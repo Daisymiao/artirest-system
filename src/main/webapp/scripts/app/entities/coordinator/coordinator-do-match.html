@@ -10,7 +10,7 @@
         </div>
     </div>
 
-    <div class="row bg-white">
+    <div class="row ">
         <div class="col-md-5">
             <table class="table table-hover table-mapped">
                 <thead>
@@ -64,8 +64,8 @@
             <table class="table table-hover">
                 <tbody>
                 <tr ng-repeat="attr in artifact1.unmappedAttrs" ng-click="onSelectAttr($event, 1)">
-                    <td class="">{{attr.name}}</td>
-                    <td class="">{{attr.comment}}</td>
+                    <td class="name">{{attr.name}}</td>
+                    <td class="comment">{{attr.comment}}</td>
                     <td class="map-anchor"></td>
                 </tr>
                 </tbody>
@@ -80,12 +80,37 @@
             <table class="table table-hover">
                 <tbody>
                 <tr ng-repeat="attr in artifact2.unmappedAttrs" ng-click="onSelectAttr($event, 2)">
-                    <td class="">{{attr.name}}</td>
-                    <td class="">{{attr.comment}}</td>
+                    <td class="name">{{attr.name}}</td>
+                    <td class="comment">{{attr.comment}}</td>
                     <td class="map-anchor"></td>
                 </tr>
                 </tbody>
             </table>
         </div>
+    </div>
+
+    <div class="row voffset5">
+        <button
+            type="button"
+            class="btn btn-primary"
+            ng-click="onConfirm()"
+            ng-disabled="selectedAttr1==null||selectedAttr2==null"
+        >
+            Confirm
+        </button>
+        <button
+            type="button"
+            class="btn btn-primary"
+            ng-click="saveCoordinator()"
+        >
+            Save
+        </button>
+        <button
+            type="button"
+            class="btn btn-primary"
+            ng-click="test()"
+        >
+            test
+        </button>
     </div>
 </div>

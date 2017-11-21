@@ -19,11 +19,17 @@ public class Coordinator implements Serializable {
     @Field("first_process_id")
     private String firstProcessId;
 
+    @Field("first_process_name")
+    private String firstProcessName;
+
     @Field("first_process_attr")
     private String firstProcessAttr;
 
     @Field("second_process_id")
     private String secondProcessId;
+
+    @Field("second_process_name")
+    private String secondProcessName;
 
     @Field("second_process_attr")
     private String secondProcessAttr;
@@ -50,6 +56,19 @@ public class Coordinator implements Serializable {
         this.firstProcessId = firstProcessId;
     }
 
+    public String getFirstProcessName() {
+        return firstProcessName;
+    }
+
+    public Coordinator firstProcessName(String firstProcessName) {
+        this.firstProcessName = firstProcessName;
+        return this;
+    }
+
+    public void setFirstProcessName(String firstProcessName) {
+        this.firstProcessName = firstProcessName;
+    }
+
     public String getFirstProcessAttr() {
         return firstProcessAttr;
     }
@@ -74,6 +93,19 @@ public class Coordinator implements Serializable {
 
     public void setSecondProcessId(String secondProcessId) {
         this.secondProcessId = secondProcessId;
+    }
+
+    public String getSecondProcessName() {
+        return secondProcessName;
+    }
+
+    public Coordinator secondProcessName(String secondProcessName) {
+        this.secondProcessName = secondProcessName;
+        return this;
+    }
+
+    public void setSecondProcessName(String secondProcessName) {
+        this.secondProcessName = secondProcessName;
     }
 
     public String getSecondProcessAttr() {
@@ -115,8 +147,10 @@ public class Coordinator implements Serializable {
         return "Coordinator{" +
             "id=" + getId() +
             ", firstProcessId='" + getFirstProcessId() + "'" +
+            ", firstProcessName='" + getFirstProcessName() + "'" +
             ", firstProcessAttr='" + getFirstProcessAttr() + "'" +
             ", secondProcessId='" + getSecondProcessId() + "'" +
+            ", secondProcessName='" + getSecondProcessName() + "'" +
             ", secondProcessAttr='" + getSecondProcessAttr() + "'" +
             "}";
     }

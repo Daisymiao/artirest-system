@@ -1,7 +1,7 @@
+'use strict';
+
 angular.module('artirestApp')
     .controller('CoordinatorController', function ($scope, $state, Coordinator, ParseLinks) {
-        console.log('CoordinatorController def ');
-
         $scope.coordinators = [];
         $scope.predicate = 'id';
         $scope.reverse = false;
@@ -28,8 +28,10 @@ angular.module('artirestApp')
         $scope.clear = function () {
             $scope.coordinators = {
                 firstProcessId: null,
+                firstProcessName: null,
                 firstProcessAttr: null,
                 secondProcessId: null,
+                secondProcessName: null,
                 secondProcessAttr: null,
                 id: null
             };

@@ -90,10 +90,12 @@ public class ProcessCreateService {
            "Vessel"
         ));
 
-        model111.services.add(new )
+
 
 
         //business rules
+
+        return model111;
 
     }
 
@@ -131,6 +133,8 @@ public class ProcessCreateService {
         //services
 
         //business rules
+
+        return model222;
 
     }
 
@@ -174,6 +178,8 @@ public class ProcessCreateService {
         //services
 
         //business rules
+
+        return model333;
 
     }
 
@@ -256,7 +262,7 @@ public class ProcessCreateService {
             host + "/loan/services/confirm",
             ServiceModel.RestMethod.PUT,
             "Loan",
-            "Loan");ProcessModel model = new ProcessModel();
+            "Loan");
         serviceModel4.inputParams.add("confirmStatus");
 
         model.services.add(serviceModel4);

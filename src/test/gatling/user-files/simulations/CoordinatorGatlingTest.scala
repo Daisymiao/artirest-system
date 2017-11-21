@@ -54,7 +54,7 @@ class CoordinatorGatlingTest extends Simulation {
             .exec(http("Create new coordinator")
             .post("/api/coordinators")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "firstProcessId":"SAMPLE_TEXT", "firstProcessAttr":"SAMPLE_TEXT", "secondProcessId":"SAMPLE_TEXT", "secondProcessAttr":"SAMPLE_TEXT"}""")).asJSON
+            .body(StringBody("""{"id":null, "firstProcessId":"SAMPLE_TEXT", "firstProcessName":"SAMPLE_TEXT", "firstProcessAttr":"SAMPLE_TEXT", "secondProcessId":"SAMPLE_TEXT", "secondProcessName":"SAMPLE_TEXT", "secondProcessAttr":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_coordinator_url"))).exitHereIfFailed
             .pause(10)

@@ -2,7 +2,6 @@
 
 angular.module('artirestApp')
     .controller('ProcessModelController', function ($scope, $state, ProcessModel, ParseLinks) {
-
         $scope.processModels = [];
         $scope.predicate = 'id';
         $scope.reverse = false;

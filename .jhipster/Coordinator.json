@@ -8,12 +8,22 @@
             "fieldValidateRules": []
         },
         {
+            "fieldName": "firstProcessName",
+            "fieldType": "String",
+            "fieldValidateRules": []
+        },
+        {
             "fieldName": "firstProcessAttr",
             "fieldType": "String",
             "fieldValidateRules": []
         },
         {
             "fieldName": "secondProcessId",
+            "fieldType": "String",
+            "fieldValidateRules": []
+        },
+        {
+            "fieldName": "secondProcessName",
             "fieldType": "String",
             "fieldValidateRules": []
         },
