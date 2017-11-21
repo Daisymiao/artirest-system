@@ -40,9 +40,6 @@ angular.module('artirestApp')
                 $scope.coordinator.secondProcessName = $scope.process2.name;
             });
 
-            // $scope.coordinator.firstProcessId =  $stateParams.id1;
-            // $scope.coordinator.secondProcessId = $stateParams.id2;
-
 
             $scope._svg = d3.select("#mappingPanel").append("svg:svg")
                 .attr("id","svg_mapping_tool")
@@ -79,7 +76,7 @@ angular.module('artirestApp')
                             .attr("cx", num==1?4:$scope._svg.node().getBoundingClientRect().width-4)
                             .attr("cy", offsetY)
                             .attr("r", 4)
-                            .attr("fill", "#ddd");
+                            .attr("fill", "#ccc");
                     }else {
                         $scope['_dot'+num].select("circle")
                             .attr("cy", offsetY);
@@ -107,7 +104,7 @@ angular.module('artirestApp')
                         .x(function(d) { return d.x; })
                         .y(function(d) { return d.y; }))
                     .attr("stroke-width", "1px")
-                    .attr("stroke", "#ddd")
+                    .attr("stroke", "#ccc")
                     .attr("fill", "none");
             }
         }
@@ -154,19 +151,16 @@ angular.module('artirestApp')
 
         $scope.saveCoordinator = function () {
             for(var i = 0; i < $scope.mappedAttrs.length; i++){
-                $scope.coordinator.firstProcessAttr = $scope.mappedAttrs[i].attr1.name;
-                $scope.coordinator.secondProcessAttr = $scope.mappedAttrs[i].attr2.name;
-                Coordinator.save($scope.coordinator, onSaveSuccess, onSaveError);
+                var new_item = {};
+                new_item.firstProcessAttr = $scope.mappedAttrs[i].attr1.name;
+                new_item.secondProcessAttr = $scope.mappedAttrs[i].attr2.name;
+                new_item.firstProcessId = $scope.coordinator.firstProcessId;
+                new_item.firstProcessName = $scope.coordinator.firstProcessName;
+                new_item.secondProcessId = $scope.coordinator.secondProcessId;
+                new_item.secondProcessName = $scope.coordinator.secondProcessName;
+                Coordinator.save(new_item, onSaveSuccess, onSaveError);
             }
 
-        }
-
-        $scope.test = function () {
-            console.log($scope.mappedAttrs);
-            console.log($scope.coordinator);
-            for(var i = 0; i < $scope.mappedAttrs.length; i++) {
-                console.log($scope.coordinator[i]);
-            }
         }
 
     });
