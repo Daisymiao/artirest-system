@@ -1,12 +1,11 @@
 angular.module('artirestApp')
-    .controller('CoordinatorDoMatchController', function ($scope, $state, $stateParams, $timeout, $window, Process, ParseLinks) {
-        $scope.firstSelectedProcess = null;
-        $scope.secondSelectedProcess = null;
+    .controller('CoordinatorDoMatchController', function ($scope, $state, $stateParams, $timeout, $window, Process, ParseLinks, Coordinator) {
+        $scope.coordinator = {};
         $scope.process1 = null;
         $scope.process2 = null;
         $scope.artifact1 = null;
         $scope.artifact2 = null;
-        $scope.mappedAttrs = [];
+        $scope.mappedAttrs = [];  // [{attr1:{name:'xxx',comment:'yyy'}, attr2:{name:'xxx',comment:'yyy'}}]
         $scope.selectedAttr1 = null;
         $scope.selectedAttr2 = null;
 
@@ -27,13 +26,23 @@ angular.module('artirestApp')
                 $scope.artifact1 = $scope.process1.processModel.artifacts[0];
                 $scope.artifact1.unmappedAttrs =$scope.artifact1.attributes.slice();
                 $timeout($scope._onResize); // trick, fix later
+
+                $scope.coordinator.firstProcessId = $scope.process1.id;
+                $scope.coordinator.firstProcessName = $scope.process1.name;
             });
             Process.get({id : $stateParams.id2}, function(result) {
                 $scope.process2 = result;
                 $scope.artifact2 = $scope.process2.processModel.artifacts[0];
                 $scope.artifact2.unmappedAttrs =$scope.artifact2.attributes.slice();
                 $timeout($scope._onResize);
+
+                $scope.coordinator.secondProcessId = $scope.process2.id;
+                $scope.coordinator.secondProcessName = $scope.process2.name;
             });
+
+            // $scope.coordinator.firstProcessId =  $stateParams.id1;
+            // $scope.coordinator.secondProcessId = $stateParams.id2;
+
 
             $scope._svg = d3.select("#mappingPanel").append("svg:svg")
                 .attr("id","svg_mapping_tool")
@@ -46,8 +55,12 @@ angular.module('artirestApp')
 
         $scope.init();
 
+
+
         $scope.onSelectAttr = function(attr, num) {
             $scope['selectedAttr'+num] = attr;
+            $scope['selectedAttr'+num].name = angular.element(attr.target).parent().children("td.name").text();
+            $scope['selectedAttr'+num].comment = angular.element(attr.target).parent().children("td.comment").text();
             $scope._updateLine();
         }
 
@@ -61,7 +74,6 @@ angular.module('artirestApp')
                         + angular.element(attr.target).height()/2
                         +8;
 
-                    console.log($scope._svg.node().getBoundingClientRect());
                     if($scope['_dot'+num].select("circle").size()==0) {
                         $scope['_dot'+num].append("svg:circle")
                             .attr("cx", num==1?4:$scope._svg.node().getBoundingClientRect().width-4)
@@ -97,6 +109,63 @@ angular.module('artirestApp')
                     .attr("stroke-width", "1px")
                     .attr("stroke", "#ddd")
                     .attr("fill", "none");
+            }
+        }
+
+        $scope.onConfirm = function () {
+            var rule = {
+                attr1: $scope.selectedAttr1,
+                attr2: $scope.selectedAttr2
+            };
+
+            for (var i = 0; i < $scope.mappedAttrs.length; i++) {
+                r = $scope.mappedAttrs[i];
+                if (r.attr1 == rule.attr1 && r.attr2 == rule.attr2) {
+                    //s
+                    return;
+                }
+            }
+
+            $scope.mappedAttrs.push(rule);
+            $scope.artifact1.unmappedAttrs = $.grep($scope.artifact1.unmappedAttrs, function (d) {
+                return d.name != rule.attr1.name;
+            });
+
+            $scope.artifact2.unmappedAttrs = $.grep($scope.artifact2.unmappedAttrs, function (d) {
+                return d.name != rule.attr2.name;
+            });
+
+            $scope.selectedAttr1 = null;
+            $scope.selectedAttr2 = null;
+            $scope._line.select("path").remove();
+            $scope._dot1.select("circle").remove();
+            $scope._dot2.select("circle").remove();
+
+        }
+
+        var onSaveSuccess = function (result) {
+            $scope.$emit('artirestApp:processModelUpdate', result);
+            $scope.isSaving = false;
+        };
+
+        var onSaveError = function (result) {
+            $scope.isSaving = false;
+        };
+
+        $scope.saveCoordinator = function () {
+            for(var i = 0; i < $scope.mappedAttrs.length; i++){
+                $scope.coordinator.firstProcessAttr = $scope.mappedAttrs[i].attr1.name;
+                $scope.coordinator.secondProcessAttr = $scope.mappedAttrs[i].attr2.name;
+                Coordinator.save($scope.coordinator, onSaveSuccess, onSaveError);
+            }
+
+        }
+
+        $scope.test = function () {
+            console.log($scope.mappedAttrs);
+            console.log($scope.coordinator);
+            for(var i = 0; i < $scope.mappedAttrs.length; i++) {
+                console.log($scope.coordinator[i]);
             }
         }
 
